@@ -18,6 +18,7 @@ namespace EL_DOS.Commands {
             commands.Add(new Help("help"));
             commands.Add(new FileCommand("file"));
             commands.Add(new ListCommand("list"));
+            commands.Add(new ClearCommand("clear"));
         }
 
         public string processInput(string input) {

@@ -21,11 +21,16 @@ namespace ELDOS {
             fsc = new FSC();
             vfs = new CosmosVFS();
             VFSManager.RegisterVFS(vfs);
-            VFSManager.
             if (fsc.CheckDirExists(@"0:\Users")) Sys.FileSystem.VFS.VFSManager.CreateDirectory(@"0:\Users");
             if (fsc.CheckDirExists(@"0:\loukoOS")) Sys.FileSystem.VFS.VFSManager.CreateDirectory(@"0:\loukoOS");
             cm = new CommandManager();
-            Console.WriteLine("Cosmos booted successfully. Type a line of text to get it echoed back.");
+            Console.Clear();
+            
+            if (!fsc.CheckFileExists(@"0:\ELDOS\OOBE.sys")) {
+                OOBE.Run();
+            } else {
+                Console.WriteLine("Starting EL-DOS");
+            }
         }
 
         protected override void Run() {

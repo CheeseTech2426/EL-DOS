@@ -91,7 +91,6 @@ namespace loukoOS.Commands {
 
                 case "write":
                     try {
-                       
                         if (fsc.CheckFileExists(args[1])) {
                             FileStream fs = (FileStream)Sys.FileSystem.VFS.VFSManager.GetFile(@"0:\" + args[1]).GetFileStream();
                             if (fs.CanWrite) {
@@ -114,8 +113,26 @@ namespace loukoOS.Commands {
                                 break;
                             }
                         } else {
-                            response = "File " + args[1] + " doesn't exist!";
-                            break;
+                            FileStream fs = (FileStream)Sys.FileSystem.VFS.VFSManager.GetFile(@"0:\" + args[1]).GetFileStream();
+                            if (fs.CanWrite) {
+                                int ctr = 0;
+                                StringBuilder sb = new StringBuilder();
+                                foreach (String s in args) {
+                                    if (ctr > 1)
+                                        sb.Append(s + ' ');
+                                    ++ctr;
+                                }
+
+                                Byte[] data = Encoding.ASCII.GetBytes(sb.ToString());
+                                fs.Write(data, 0, data.Length);
+                                fs.Close();
+
+                                response = "Successfully wrote to file";
+
+                            } else {
+                                response = "Unable to write to file! Not open for writing!";
+                                break;
+                            }
                         }
                     } catch (Exception ex) {
 
@@ -143,7 +160,16 @@ namespace loukoOS.Commands {
                             }
                             break;
                         } else {
-                            response = "File " + args[1] + " doesn't exist!";
+                            if (fs.CanRead) {
+                                Byte[] data = new Byte[256];
+                                fs.Read(data, 0, data.Length);
+                                response = Encoding.ASCII.GetString(data);
+
+
+                            } else {
+                                response = "Unable to read file! Not open for reading!";
+                                break;
+                            }
                             break;
                         }
                     } catch (Exception ex) {
