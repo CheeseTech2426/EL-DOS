@@ -40,7 +40,7 @@ namespace ELDOS {
         protected override void Run() {
             if (!Panic.CPUHalted) {
                 if (!inRM) {
-                    Console.Write("DOS> ");
+                    Console.Write(">> ");
                     Console.WriteLine(this.cm.processInput(Console.ReadLine()));
                 } else {
                     Console.Write("RecoveryMode> ");
