@@ -4,15 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cosmos.System;
+//using Cosmos.System;
 using EL_DOS;
+using ELDOS;
 using s = System;
 
 namespace EL_DOS.ELDOS
 {
     public class FSC
     {
-
+        public Kernel k;
 
         public void WriteToFile(string file, string data)
         {
@@ -21,10 +22,10 @@ namespace EL_DOS.ELDOS
                 StreamWriter sw = new StreamWriter(file);
                 sw.Write(data);
                 sw.Close();
-            }
-            catch
-            {
-                CrashScreen.Run("0x01", "StreamWriter performed an illegal operation");
+                return;
+            } catch (Exception e) {
+                Panic.panic(e.Message);
+                return;
             }
         }
 
@@ -36,10 +37,8 @@ namespace EL_DOS.ELDOS
                 var data = sw.ReadToEnd();
                 sw.Close();
                 return data;
-            }
-            catch
-            {
-                CrashScreen.Run("0x02", "StreamReader performed an illegal operation");
+            } catch (Exception e) {
+                Panic.panic(e.Message);
                 return null;
             }
         }
@@ -52,10 +51,8 @@ namespace EL_DOS.ELDOS
                    Directory.CreateDirectory(path);
                 else
                     s.Console.WriteLine("Directory already exist!");
-            }
-            catch
-            {
-                CrashScreen.Run("0x03", "Could not create dir " + path.Substring(path.LastIndexOf(@"\" + 1)));
+            } catch (Exception e) {
+                Panic.panic(e.Message);
             }
         }
 
@@ -67,10 +64,8 @@ namespace EL_DOS.ELDOS
                     Directory.Delete(path);
                 else
                     s.Console.WriteLine("Directory doesn't exist!");
-            }
-            catch
-            {
-                CrashScreen.Run("0x04", "Could not delete dir " + path.Substring(path.LastIndexOf(@"\" + 1)));
+            } catch (Exception e) {
+                Panic.panic(e.Message);
             }
         }
 
@@ -82,10 +77,8 @@ namespace EL_DOS.ELDOS
                 if (File.Exists(path))
                     File.Delete(path);
                 else s.Console.WriteLine("File doesn't exist!");
-            }
-            catch
-            {
-                CrashScreen.Run("0x05", "Could not delete file " + path.Substring(path.LastIndexOf(@"\" + 1)));
+            } catch (Exception e) {
+                Panic.panic(e.Message);
             }
         }
 
@@ -96,10 +89,8 @@ namespace EL_DOS.ELDOS
                 if (!File.Exists(path))
                     File.Create(path);
                 else s.Console.WriteLine("File already exists!");
-            }
-            catch
-            {
-                CrashScreen.Run("0x06", "Could not create file " + path.Substring(path.LastIndexOf(@"\" + 1)));
+            } catch (Exception e) {
+                Panic.panic(e.Message);
             }
         }
 
@@ -111,9 +102,9 @@ namespace EL_DOS.ELDOS
                     return true;
                 else return false;
             }
-            catch
+            catch(Exception e)
             {
-                CrashScreen.Run("0x06", "Could not check if file exists!");
+                Panic.panic(e.Message);
                 return false;
             }
         }
@@ -127,12 +118,30 @@ namespace EL_DOS.ELDOS
                 if (Directory.Exists(path))
                     return true;
                 else return false;
-            }
-            catch
-            {
-                CrashScreen.Run("0x06", "Could not check if dir exists!");
+            } catch (Exception e) {
+                Panic.panic(e.Message);
                 return false;
             }
         }
+
+        public uint GetRAM() {
+            uint ram = Cosmos.Core.CPU.GetAmountOfRAM();
+            return ram;
+        }
+
+        public uint GetFsType(string disk) {
+            uint free = Convert.ToUInt32(Kernel.vfs.GetTotalFreeSpace(disk));
+            return free;
+        }
+
+        public uint GetDiskSize(string disk) {
+            uint size = Convert.ToUInt32(Kernel.vfs.GetTotalSize(disk));
+            return size;
+        }
+
+        public static void StartRM() {
+           
+        }
+
     }
 }

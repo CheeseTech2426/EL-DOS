@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 using Cosmos.System;
 using s = System;
 using ELDOS;
+using System.Runtime.InteropServices;
 
 namespace EL_DOS.ELDOS
 {
-    internal class CrashScreen
+    internal class Panic
     {
 
         public static bool CPUHalted = false;
 
-        public static void Run(string errorcode, string errormessage)
+        public static void panic(string errormessage, string errorcode = "")
         {
             Cosmos.System.Kernel kernel;
             s.Console.BackgroundColor = ConsoleColor.Blue;
@@ -27,7 +28,9 @@ namespace EL_DOS.ELDOS
             s.Console.WriteLine("");
             s.Console.WriteLine("");
             s.Console.WriteLine("   System error :(");
-            s.Console.WriteLine($"   {errormessage}! Error code: {errorcode}");
+            s.Console.WriteLine($"   {errormessage}!");
+            if(errorcode != "")
+                s.Console.WriteLine($"   Error code: {errorcode}");
             s.Console.WriteLine("   CPU halted. Please restart your machine");
             s.Console.WriteLine("        ,--.!,");
             s.Console.WriteLine("     __/   -*-");

@@ -1,4 +1,5 @@
 ﻿using EL_DOS.Commands;
+using EL_DOS.ELDOS;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace ELDOS.Commands {
                     Console.WriteLine($"[{directory}]");
                 }
             } catch (Exception e) {
-                Console.WriteLine($"Error: {e.ToString()}");
+                Panic.panic(e.Message);
             }
             return "";
         }

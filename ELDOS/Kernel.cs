@@ -11,13 +11,14 @@ namespace ELDOS {
     public class Kernel : Sys.Kernel {
 
         CommandManager cm;
-        CrashScreen crashScreen;
-        CosmosVFS vfs;
+        Panic crashScreen;
+        public static CosmosVFS vfs;
         FSC fsc;
-            
+        public static bool inRM;
+
         protected override void BeforeRun() {
-            crashScreen = new CrashScreen();
-            CrashScreen.CPUHalted = false;
+            crashScreen = new Panic();
+            Panic.CPUHalted = false;
             fsc = new FSC();
             vfs = new CosmosVFS();
             VFSManager.RegisterVFS(vfs);
@@ -25,7 +26,10 @@ namespace ELDOS {
             if (fsc.CheckDirExists(@"0:\loukoOS")) Sys.FileSystem.VFS.VFSManager.CreateDirectory(@"0:\loukoOS");
             cm = new CommandManager();
             Console.Clear();
-            
+            inRM = false;
+            if (Sys.KeyboardManager.AltPressed) {
+                FSC.StartRM(); // If alt is pressed, start recovery mode (RM)
+            }
             if (!fsc.CheckFileExists(@"0:\ELDOS\OOBE.sys")) {
                 OOBE.Run();
             } else {
@@ -34,9 +38,14 @@ namespace ELDOS {
         }
 
         protected override void Run() {
-            if (!CrashScreen.CPUHalted) {
-                Console.Write("Input: ");
-                Console.WriteLine(this.cm.processInput(Console.ReadLine()));
+            if (!Panic.CPUHalted) {
+                if (!inRM) {
+                    Console.Write("DOS> ");
+                    Console.WriteLine(this.cm.processInput(Console.ReadLine()));
+                } else {
+                    Console.Write("RecoveryMode> ");
+                    Console.WriteLine(this.cm.processRecoveryInput(Console.ReadLine()));
+                }
             } else {
 
             }

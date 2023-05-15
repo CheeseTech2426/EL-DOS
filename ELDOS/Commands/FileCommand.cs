@@ -27,7 +27,7 @@ namespace loukoOS.Commands {
                         
                     } catch (Exception ex) {
                         response = "";
-                        CrashScreen.Run("", ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
@@ -45,8 +45,8 @@ namespace loukoOS.Commands {
                       
                     } catch (Exception ex) {
 
-                        response = ex.ToString();
-                        CrashScreen.Run("", response);
+                        response = "";
+                        Panic.panic("", ex.Message);
                         break;
 
                     }
@@ -63,8 +63,8 @@ namespace loukoOS.Commands {
                             break;
                         }
                     } catch (Exception ex) {
-                        response = ex.ToString();
-                        CrashScreen.Run("", response);
+                        response = "";
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
@@ -80,8 +80,8 @@ namespace loukoOS.Commands {
 
                         }
                     } catch (Exception ex) {
-                        response = ex.ToString();
-                        CrashScreen.Run("", response);
+                        response = "";
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
@@ -136,8 +136,8 @@ namespace loukoOS.Commands {
                         }
                     } catch (Exception ex) {
 
-                        response = ex.ToString();
-                        CrashScreen.Run("", response);
+                        response = "";
+                        Panic.panic("", ex.Message);
                         break;
 
                     }
@@ -173,7 +173,8 @@ namespace loukoOS.Commands {
                             break;
                         }
                     } catch (Exception ex) {
-                        response = ex.ToString();
+                        response = "";
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
