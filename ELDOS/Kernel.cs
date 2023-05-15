@@ -28,7 +28,7 @@ namespace ELDOS {
             Console.Clear();
             inRM = false;
             if (Sys.KeyboardManager.AltPressed) {
-                FSC.StartRM(); // If alt is pressed, start recovery mode (RM)
+                inRM = true;
             }
             if (!fsc.CheckFileExists(@"0:\ELDOS\OOBE.sys")) {
                 OOBE.Run();
