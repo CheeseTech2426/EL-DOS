@@ -48,11 +48,8 @@ namespace ELDOS.Commands {
                     }
                 case "format":
                     try {
-                        int index = Convert.ToInt32(args[1]);
-                        string format = args[2];
-                        bool quick = Convert.ToBoolean(args[3]);
-                        d.FormatPartition(index, format, quick);
                         
+                       
                     } catch {
                         Console.WriteLine($"Could not format drive");
                     }

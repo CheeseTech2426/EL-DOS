@@ -140,7 +140,7 @@ namespace EL_DOS.ELDOS
         }
 
         public static void StartRM() {
-           
+            Kernel.inRM = true;
         }
 
     }
