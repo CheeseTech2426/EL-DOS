@@ -27,7 +27,7 @@ namespace loukoOS.Commands {
                         
                     } catch (Exception ex) {
                         response = "";
-                        Panic.panic(ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
@@ -46,7 +46,7 @@ namespace loukoOS.Commands {
                     } catch (Exception ex) {
 
                         response = "";
-                        Panic.panic(ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
 
                     }
@@ -64,7 +64,7 @@ namespace loukoOS.Commands {
                         }
                     } catch (Exception ex) {
                         response = "";
-                        Panic.panic(ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
@@ -81,7 +81,7 @@ namespace loukoOS.Commands {
                         }
                     } catch (Exception ex) {
                         response = "";
-                        Panic.panic(ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
@@ -137,7 +137,7 @@ namespace loukoOS.Commands {
                     } catch (Exception ex) {
 
                         response = "";
-                        Panic.panic(ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
 
                     }
@@ -174,7 +174,7 @@ namespace loukoOS.Commands {
                         }
                     } catch (Exception ex) {
                         response = "";
-                        Panic.panic(ex.Message);
+                        Panic.panic("", ex.Message);
                         break;
                     }
                     break;
