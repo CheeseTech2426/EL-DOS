@@ -28,6 +28,7 @@ namespace ELDOS {
             Console.Clear();
             inRM = false;
             if (Sys.KeyboardManager.AltPressed) {
+                Console.WriteLine("Starting EL-DOS Recovery Mode...");
                 inRM = true;
             }
             if (!fsc.CheckFileExists(@"0:\ELDOS\OOBE.sys")) {
@@ -43,7 +44,7 @@ namespace ELDOS {
                     Console.Write(">> ");
                     Console.WriteLine(this.cm.processInput(Console.ReadLine()));
                 } else {
-                    Console.Write("RecoveryMode> ");
+                    Console.Write(">> ");
                     Console.WriteLine(this.cm.processRecoveryInput(Console.ReadLine()));
                 }
             } else {

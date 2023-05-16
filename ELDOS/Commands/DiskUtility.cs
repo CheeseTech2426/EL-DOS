@@ -48,8 +48,7 @@ namespace ELDOS.Commands {
                     }
                 case "format":
                     try {
-                        
-                       
+                        Panic.panic("Format doesn't work, because format in COSMOS is broken!");
                     } catch {
                         Console.WriteLine($"Could not format drive");
                     }
