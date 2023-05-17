@@ -22,6 +22,8 @@ namespace EL_DOS.Commands {
             commands.Add(new ClearCommand("clear"));
             commands.Add(new DiskUtility("disk"));
             commands.Add(new Power("power"));
+            commands.Add(new LogoutCommand("logout"));
+           
 
             recoveryUtils = new List<Command>(2);
             recoveryUtils.Add(new FileCommand("file"));

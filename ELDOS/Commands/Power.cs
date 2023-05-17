@@ -11,29 +11,14 @@ namespace ELDOS.Commands {
         public Power(String name) : base(name) { }
         public override string execute(string[] args) {
             string res = "";
-            ConsoleKey ck;
-            switch (args[0]) {
+            /*switch (args[0]) {
                 case "shutdown":
-                    Console.Write("Shutdown? (y/n) ");
-                    ConsoleKeyInfo input = Console.ReadKey();
-                    if (input.KeyChar == 'Y' || input.KeyChar == 'y')
-                        Cosmos.System.Power.Shutdown();
-                    else if (input.KeyChar == 'N' || input.KeyChar == 'n')
-                        Console.WriteLine("Shutdown cancelled");
-                    else
-                        Console.WriteLine("Shutdown cancelled");
+                    Cosmos.System.Power.Shutdown();
                     break;
                 case "restart":
-                    Console.Write("Restart? (y/n) ");
-                    ConsoleKeyInfo input2 = Console.ReadKey();
-                    if (input2.KeyChar == 'Y' || input2.KeyChar == 'y')
-                        Cosmos.System.Power.Reboot();
-                    else if (input2.KeyChar == 'N' || input2.KeyChar == 'n')
-                        Console.WriteLine("Restart cancelled");
-                    else
-                        Console.WriteLine("Restart cancelled");
+                    Cosmos.System.Power.Reboot();
                     break;
-            }
+            }*/
             return res;
         }
     }
